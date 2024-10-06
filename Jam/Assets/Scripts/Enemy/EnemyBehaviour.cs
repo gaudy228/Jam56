@@ -9,7 +9,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     [Header("Move")]
     public float _speed;
-    private float _HorizontalMove;
+    public float _HorizontalMoveE;
     [HideInInspector] public Rigidbody2D _rb;
 
     public float _jumpForce;
@@ -18,8 +18,8 @@ public class EnemyBehaviour : MonoBehaviour
     [HideInInspector] public bool minJamp = false;
     [HideInInspector] public bool _isWater;
     [HideInInspector] public bool _isWood;
-    [HideInInspector] public GameObject _Wood;
-    [HideInInspector] public Rigidbody2D _rbWood;
+     public GameObject _Wood;
+     public Rigidbody2D _rbWood;
     private void Awake()
     {
         _rb = GetComponentInParent<Rigidbody2D>();
@@ -43,9 +43,9 @@ public class EnemyBehaviour : MonoBehaviour
     }
     public void Move()
     { 
-            _HorizontalMove = Input.GetAxisRaw("Horizontal");
+            _HorizontalMoveE = Input.GetAxisRaw("Horizontal");
             
-            _rb.velocity = new Vector2(_speed * _HorizontalMove, _rb.velocity.y);
+            _rb.velocity = new Vector2(_speed * _HorizontalMoveE, _rb.velocity.y);
         
     }
     public void Jump()
@@ -75,7 +75,7 @@ public class EnemyBehaviour : MonoBehaviour
         }
         if (col.gameObject.CompareTag("Wood"))
         {
-            _isWater = true;
+            
             _isWood = true;
             _Wood = col.gameObject;
             _rbWood = col.gameObject.GetComponent<Rigidbody2D>();
@@ -97,7 +97,7 @@ public class EnemyBehaviour : MonoBehaviour
         }
         if (col.gameObject.CompareTag("Wood"))
         {
-            _isWater = false;
+           
             _isWood = false;
             _rbWood.velocity = new Vector2(0, _rbWood.velocity.y);
             _Wood = null;

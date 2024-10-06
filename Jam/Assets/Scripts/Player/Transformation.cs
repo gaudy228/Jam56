@@ -11,9 +11,14 @@ public class Transformation : MonoBehaviour
     private Rigidbody2D _rbEnemy;
     private bool _canTransform = true;
     [HideInInspector] public bool _canTransformBeforDieKhruch = false;
+    private Animator _anim;
+    Move _move;
+    
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _anim = GetComponent<Animator>();
+        _move = GetComponent<Move>();
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -38,7 +43,7 @@ public class Transformation : MonoBehaviour
     private void Update()
     {
         InOtherBody();
-
+      
         if (_canTransformBeforDieKhruch)
         {
             _canTransformBeforDieKhruch = false;
@@ -49,32 +54,28 @@ public class Transformation : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.E) && isTransformation && _canTransform && !_inBody)
         {
-            _inBody = true;
+            _rb.gravityScale = 0;
+            StartCoroutine(AmimVsel());
+            _move._canMove = false;
             _rb.velocity = new Vector2(0, 0);
             
-            transform.position = enemy.transform.position;
-
-            transform.parent = enemy.transform;
-            _rbEnemy = enemy.GetComponent<Rigidbody2D>();
-            _rb.gravityScale = 0;
             StartCoroutine(ReloadingTramsform());
         }
         if (Input.GetKey(KeyCode.E) && isTransformation && _canTransform && _inBody)
         {
-            _inBody = false;
-            _rb.velocity = new Vector2(0, 0);
-            _rbEnemy.velocity = new Vector2(0, 0);
-            _rbEnemy = null;
-            transform.parent = null;
-            enemy = null;
-            _rb.gravityScale = 1;
+            
+            StartCoroutine(AmimVausel());
             StartCoroutine(ReloadingTramsform());
         }
         
         
-        if(_inBody)
+        if(_inBody && transform.parent == enemy.transform)
         {
             transform.position = enemy.transform.position;
+        }
+        if(enemy == null)
+        {
+            _move._canMove = true;
         }
     }
     IEnumerator ReloadingTramsform()
@@ -88,5 +89,49 @@ public class Transformation : MonoBehaviour
         _canTransform = false;
         yield return new WaitForSecondsRealtime(3f);
         _canTransform = true;
+    }
+    private IEnumerator AmimVausel()
+    {
+        _inBody = false;
+        transform.parent = null;
+        _rb.velocity = new Vector2(0, 0);
+        transform.localPosition = new Vector3(transform.localPosition.x + 1.45f, transform.localPosition.y);
+        _anim.SetTrigger("VauselT");
+        _anim.SetBool("VauselB", true);
+        _rb.gravityScale = 0;
+        yield return new WaitForSecondsRealtime(1);
+        
+        _anim.SetBool("VauselB", false);
+        
+        
+        _rbEnemy.velocity = new Vector2(0, 0);
+        _rbEnemy = null;
+        
+        enemy = null;
+        _rb.gravityScale = 1;
+        _move._canMove = true;
+    }
+    private IEnumerator AmimVsel()
+    {
+        
+        if (transform.position.x > enemy.transform.position.x)
+        {
+            transform.localScale = new Vector3(-1, transform.localScale.y, 1);
+        }
+        if (transform.position.x < enemy.transform.position.x)
+        {
+            transform.localScale = new Vector3(1, transform.localScale.y, 1);
+        }
+       
+        _anim.SetTrigger("VselT");
+        _anim.SetBool("VselB", true);
+        yield return new WaitForSecondsRealtime(1);
+        _anim.SetBool("VselB", false);
+        _inBody = true;
+        _rb.velocity = new Vector2(0, 0);
+         transform.parent = enemy.transform;
+         _rbEnemy = enemy.GetComponent<Rigidbody2D>();
+        transform.position = enemy.transform.position;
+        transform.localScale = new Vector3(1, transform.localScale.y, 1);
     }
 }

@@ -17,33 +17,59 @@ public class Move : MonoBehaviour
 
     Transformation _transformation;
 
-    
-    
-   
+    private Animator _anim;
+
+    [HideInInspector] public float _trWere;
+     public bool _canMove = true;
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _transformation = GetComponent<Transformation>();
+        _anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        MovePlayer();
-        JumpPlayer();
+        if (_canMove)
+        {
+            MovePlayer();
+            JumpPlayer();
+
+        }
+        
         
     }
     private void MovePlayer() // тут типо перс перемещается
     {
         _HorizontalMove = Input.GetAxisRaw("Horizontal");
+        _anim.SetFloat("Run", Mathf.Abs(_HorizontalMove));
         if (!_transformation._inBody)
         {
             
             //transform.position += new Vector3(_speed * _HorizontalMove, 0) * Time.deltaTime;
             //_rb.velocity = new Vector3(0, _rb.velocity.y, 0);
             _rb.velocity = new Vector2(_speed * _HorizontalMove, _rb.velocity.y);
+            if (Input.GetKey(KeyCode.D))
+            {
+                _trWere = 1;
+                transform.localScale = new Vector3(1, 1 , 1);
+            }
+            if(Input.GetKey(KeyCode.A))
+            {
+                _trWere = -1;
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
+        
+
+        
 
         }
+        if(_rb.velocity.y < 0)
+        {
+            _anim.SetBool("IsFly", true);
+        }
+       
         
     }
     private void JumpPlayer()
@@ -52,14 +78,22 @@ public class Move : MonoBehaviour
         {
             _rb.velocity = new Vector2(0, 0);
             _rb.AddForce(new Vector2(_rb.velocity.x, _jumpForce), ForceMode2D.Impulse);
+            _anim.SetTrigger("JumpT");
         }
     }
-    
 
 
 
 
 
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("Floor"))
+        {
+            _anim.SetTrigger("IsGroung");
+            _anim.SetBool("IsFly", false);
+        }
+    }
     private void OnTriggerStay2D(Collider2D col)
     {
         if (col.gameObject.CompareTag("Floor"))

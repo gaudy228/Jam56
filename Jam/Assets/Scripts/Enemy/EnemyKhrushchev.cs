@@ -11,10 +11,7 @@ public class EnemyKhrushchev : EnemyBehaviour
     [SerializeField] private GameObject _parent;
     [SerializeField] private GameObject _prefabParent;
     [SerializeField] private Transform _sppParent;
-    //private void Start()
-    //{
-    //    _rb.velocity = new Vector2(0, 0);
-    //}
+   
     void Update()
     {
         if (_isParent)
@@ -61,6 +58,7 @@ public class EnemyKhrushchev : EnemyBehaviour
         _Player.transform.parent = null;
         _transformation._canTransformBeforDieKhruch = true;
         _rb.velocity = new Vector2(0, 0);
+       
         Instantiate(_prefabParent, _sppParent.transform.position, _sppParent.transform.rotation);
         Destroy(_parent);
         
