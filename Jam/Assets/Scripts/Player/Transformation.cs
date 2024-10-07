@@ -13,7 +13,9 @@ public class Transformation : MonoBehaviour
     [HideInInspector] public bool _canTransformBeforDieKhruch = false;
     private Animator _anim;
     Move _move;
+
     
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -66,6 +68,7 @@ public class Transformation : MonoBehaviour
             
             StartCoroutine(AmimVausel());
             StartCoroutine(ReloadingTramsform());
+            gameObject.GetComponent<SpriteRenderer>().enabled = true;
         }
         
         
@@ -73,10 +76,16 @@ public class Transformation : MonoBehaviour
         {
             transform.position = enemy.transform.position;
         }
+        else
+        {
+            gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        }
         if(enemy == null)
         {
             _move._canMove = true;
         }
+        
+        
     }
     IEnumerator ReloadingTramsform()
     {
@@ -90,7 +99,7 @@ public class Transformation : MonoBehaviour
         yield return new WaitForSecondsRealtime(3f);
         _canTransform = true;
     }
-    private IEnumerator AmimVausel()
+    public IEnumerator AmimVausel()
     {
         _inBody = false;
         transform.parent = null;
@@ -103,11 +112,15 @@ public class Transformation : MonoBehaviour
         
         _anim.SetBool("VauselB", false);
         
+        if(enemy != null && _rbEnemy != null)
+        {
+            _rbEnemy.velocity = new Vector2(0, 0);
+            _rbEnemy = null;
         
-        _rbEnemy.velocity = new Vector2(0, 0);
-        _rbEnemy = null;
+            enemy = null;
+
+        }
         
-        enemy = null;
         _rb.gravityScale = 1;
         _move._canMove = true;
     }

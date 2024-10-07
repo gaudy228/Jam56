@@ -118,6 +118,8 @@ MonoBehaviour:
   _speed: 5
   _HorizontalMove: 0
   _jumpForce: 6
+  _trWere: 0
+  _canMove: 1
 --- !u!50 &918289790526013317
 Rigidbody2D:
   serializedVersion: 4

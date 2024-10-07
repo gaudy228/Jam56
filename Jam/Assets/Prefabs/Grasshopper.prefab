@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 278500230598313690}
   - component: {fileID: 3782947369003539365}
   - component: {fileID: 4445714489738871612}
+  - component: {fileID: 3930873372611410944}
   m_Layer: 3
   m_Name: Grasshopper
   m_TagString: Transform
@@ -29,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.71, y: -0.7911, z: 0}
-  m_LocalScale: {x: 1, y: 2.2579, z: 1}
+  m_LocalScale: {x: 1.875, y: 2.2579, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3809525854025362064}
@@ -76,12 +77,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.026666403, g: 1, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 9e29a4bc1a5e1e345bf6f9dbc2b096ef, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3.2, y: 3.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -119,18 +120,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.30231023}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 3.2, y: 3.2}
+    newSize: {x: 3.2, y: 3.2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 6.5959797, y: 2.2696722}
+  m_Size: {x: 3.3548932, y: 1.4355867}
   m_EdgeRadius: 0
 --- !u!50 &4445714489738871612
 Rigidbody2D:
@@ -159,6 +160,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &3930873372611410944
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4884053697376428515}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2ecc5073e0bff4342be4891659171468, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7805835561789108554
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,7 +246,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.020088434, y: -0.33813828}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -235,7 +257,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.365172, y: 1.3287848}
   m_EdgeRadius: 0
 --- !u!114 &6853073309052189956
 MonoBehaviour:
@@ -251,9 +273,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Player: {fileID: 0}
   _transformation: {fileID: 0}
-  _speed: 6
+  _speed: 10
+  _HorizontalMoveE: 0
   _rb: {fileID: 0}
-  _jumpForce: 7
+  _jumpForce: 11
   _Plant: 0
   _isGround: 0
   minJamp: 0
@@ -261,5 +284,5 @@ MonoBehaviour:
   _isWood: 0
   _Wood: {fileID: 0}
   _rbWood: {fileID: 0}
-  _dopJumpForce: 8
+  _dopJumpForce: 10
   _isParent: 0

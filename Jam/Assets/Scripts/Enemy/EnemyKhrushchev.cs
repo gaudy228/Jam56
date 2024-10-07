@@ -11,11 +11,13 @@ public class EnemyKhrushchev : EnemyBehaviour
     [SerializeField] private GameObject _parent;
     [SerializeField] private GameObject _prefabParent;
     [SerializeField] private Transform _sppParent;
-   
+    
+  
     void Update()
     {
         if (_isParent)
         {
+            _Player.GetComponent<SpriteRenderer>().enabled = false;
             Move();
             //Jump();
             Fly();
@@ -25,12 +27,23 @@ public class EnemyKhrushchev : EnemyBehaviour
                 StartCoroutine(TimeDie());
                 _startDied = false;
             }
-            
+            if (Input.GetKey(KeyCode.D))
+            {
+
+                transform.parent.localScale = new Vector3(1.1f, 0.9f, 1);
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+
+                transform.parent.localScale = new Vector3(-1.1f, 0.9f, 1);
+            }
+
         }
         else
         {
-            _rb.velocity = new Vector2(0, 0);
             _rb.gravityScale = 0;
+            _rb.velocity = new Vector2(0, 0);
+            
         }
 
 
@@ -53,11 +66,16 @@ public class EnemyKhrushchev : EnemyBehaviour
     }
     IEnumerator TimeDie()
     {
+        _rb.velocity = new Vector2(0, 0);
+        _Player.transform.localScale = new Vector3(1, 1, 1);
+        _Player.GetComponent<SpriteRenderer>().enabled = true;
+        
         yield return new WaitForSeconds(2f);
+        
         _transformation._inBody = false;
         _Player.transform.parent = null;
         _transformation._canTransformBeforDieKhruch = true;
-        _rb.velocity = new Vector2(0, 0);
+        
        
         Instantiate(_prefabParent, _sppParent.transform.position, _sppParent.transform.rotation);
         Destroy(_parent);

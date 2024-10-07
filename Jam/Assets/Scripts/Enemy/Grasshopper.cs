@@ -8,7 +8,7 @@ public class Grasshopper : EnemyBehaviour
     public bool _isParent;
     private Animator _anim;
     private bool _localPScale;
-    // Update is called once per frame
+    
     private void Start()
     {
         _anim = GetComponentInParent<Animator>();
@@ -17,6 +17,7 @@ public class Grasshopper : EnemyBehaviour
     {
         if(_isParent)
         {
+            
             _localPScale = true;
             Move();
             Jump();
@@ -41,14 +42,17 @@ public class Grasshopper : EnemyBehaviour
         }
         else
         {
+            
             _rb.velocity = new Vector2(0, _rb.velocity.y);
             if (_localPScale)
             {
                 _Player.transform.localScale = new Vector3(1, 1, 1);
+                _Player.GetComponent<SpriteRenderer>().enabled = true;
                 _localPScale = false;
+                _anim.SetFloat("Run", 0);
             }
             
-            _Player.GetComponent<SpriteRenderer>().enabled = true;
+            
         }
         
 

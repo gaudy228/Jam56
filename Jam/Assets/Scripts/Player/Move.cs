@@ -100,7 +100,7 @@ public class Move : MonoBehaviour
         {
             _isGround = true;
         }
-        if (col.gameObject.CompareTag("Water"))
+        if (col.gameObject.CompareTag("Water") || col.gameObject.CompareTag("Thorns"))
         {
             SceneManager.LoadScene(0);
             

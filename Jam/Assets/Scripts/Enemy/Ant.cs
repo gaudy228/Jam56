@@ -17,7 +17,8 @@ public class Ant : EnemyBehaviour
     private bool _canMoveE = true;
 
     private bool _isClimpMoreFirst = false;
-    private bool _BehinAnim = false;
+    
+    private bool _localPScale;
     private void Start()
     {
         _move = _Player.GetComponent<Move>();
@@ -28,22 +29,47 @@ public class Ant : EnemyBehaviour
     {
         if (_isParent)
         {
-            if(!_isClimb)
+            _Player.GetComponent<SpriteRenderer>().enabled = false;
+            _localPScale = true;
+            if (!_isClimb)
             {
                 
                 Jump();
 
             }
+            if (Input.GetKey(KeyCode.D) && !_isWood && !Input.GetKey(KeyCode.LeftShift))
+            {
+
+                transform.parent.localScale = new Vector3(1.3f, 1.1f, 1);
+            }
+            if (Input.GetKey(KeyCode.A) && !_isWood && !Input.GetKey(KeyCode.LeftShift))
+            {
+
+                transform.parent.localScale = new Vector3(-1.3f, 1.1f, 1);
+            }
             Move();
            
             DragWood();
+            
 
             _anim.SetFloat("Run", Mathf.Abs(_HorizontalMoveE));
+            if (Input.GetKey(KeyCode.Space) && _isGround)
+            {
+                _anim.SetTrigger("JumpT");
 
+            }
         }
         else
         {
             _rb.velocity = new Vector2(0, _rb.velocity.y);
+            if (_localPScale)
+            {
+                _Player.transform.localScale = new Vector3(1, 1, 1);
+                _Player.GetComponent<SpriteRenderer>().enabled = true;
+                _localPScale = false;
+                _anim.SetFloat("Run", 0);
+            }
+
             
         }
 
@@ -116,6 +142,13 @@ public class Ant : EnemyBehaviour
        
        
    }
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("Floor"))
+        {
+            _anim.SetTrigger("IsGroung");
+        }
+    }
     private IEnumerator AnimExit()
     {
         _anim.SetTrigger("ExitT");
@@ -126,10 +159,10 @@ public class Ant : EnemyBehaviour
     private IEnumerator AnimBeg()
     {
         _anim.SetTrigger("BeginT");
-        _BehinAnim = false;
+        
         _canMoveE = false;
         yield return new WaitForSeconds(0.3f);
-        _BehinAnim = true;
+        
         _canMoveE = true;
     }
 }
