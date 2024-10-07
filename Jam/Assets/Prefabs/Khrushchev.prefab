@@ -273,7 +273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Player: {fileID: 0}
   _transformation: {fileID: 0}
-  _speed: 8
+  _speed: 12
   _HorizontalMoveE: 0
   _rb: {fileID: 0}
   _jumpForce: 0
