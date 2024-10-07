@@ -13,7 +13,7 @@ public class Move : MonoBehaviour
     [Header("Jump")]
     [SerializeField] private float _jumpForce;
     private bool _isGround;
-
+    public int n;
 
     Transformation _transformation;
 
@@ -102,7 +102,7 @@ public class Move : MonoBehaviour
         }
         if (col.gameObject.CompareTag("Water") || col.gameObject.CompareTag("Thorns"))
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(n);
             
         }
     }

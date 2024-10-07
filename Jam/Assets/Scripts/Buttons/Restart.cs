@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Restart : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public int _w;
     void Start()
     {
         
@@ -17,6 +17,6 @@ public class Restart : MonoBehaviour
     }
     public void RestartButton()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(_w);
     }
 }

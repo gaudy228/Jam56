@@ -96,7 +96,7 @@ MonoBehaviour:
   _speed: 6
   _HorizontalMoveE: 0
   _rb: {fileID: 0}
-  _jumpForce: 7.5
+  _jumpForce: 8.5
   _Plant: 0
   _isGround: 0
   minJamp: 0

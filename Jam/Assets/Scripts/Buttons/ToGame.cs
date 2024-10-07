@@ -18,14 +18,17 @@ public class ToGame : MonoBehaviour
     }
     public void ToPlay()
     {
-        SceneManager.LoadScene(3);
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene(2);
     }
     public void ToMenu()
     {
+        PlayerPrefs.DeleteAll();
         SceneManager.LoadScene(0);
     }
     public void ToTraining()
     {
-        SceneManager.LoadScene(2);
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene(1);
     }
 }
