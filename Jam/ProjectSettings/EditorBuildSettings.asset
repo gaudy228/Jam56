@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TrainingScene.unity
     guid: 50f4dc52f14d15a4ba3355bfadbdea03
+  - enabled: 1
+    path: Assets/Scenes/4LvL.unity
+    guid: 9ce61fac64f10734db1ff8100c2e40bf
   m_configObjects: {}

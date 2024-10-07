@@ -9,8 +9,7 @@ public class Plant : MonoBehaviour
 
     private int currentTarget;
     private bool _stopPlatform;
-    private bool _parentE = false;
-    private bool _parentP = false;
+   
     private void Update()
     {
         if (!_stopPlatform)

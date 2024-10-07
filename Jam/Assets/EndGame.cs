@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ToGame : MonoBehaviour
+public class EndGame : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -16,16 +16,11 @@ public class ToGame : MonoBehaviour
     {
         
     }
-    public void ToPlay()
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        SceneManager.LoadScene(3);
-    }
-    public void ToMenu()
-    {
-        SceneManager.LoadScene(0);
-    }
-    public void ToTraining()
-    {
-        SceneManager.LoadScene(2);
+        if (col.gameObject.CompareTag("Player"))
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 }
