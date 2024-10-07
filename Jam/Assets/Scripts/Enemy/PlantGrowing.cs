@@ -8,6 +8,11 @@ public class PlantGrowing : MonoBehaviour
     [HideInInspector] public EnemyDungBeetle _enemyDungBeetle;
     private bool _Plant = true;
     [SerializeField] private GameObject _PlantLadder;
+    private Animator _anim;
+    private void Start()
+    {
+        _anim = GetComponent<Animator>();
+    }
     private void Update()
     {
         if(_enemyDungBeetle != null)
@@ -15,8 +20,8 @@ public class PlantGrowing : MonoBehaviour
             if (_enemyDungBeetle._PlantGrowing && _Plant)
             {
 
-                
-                _PlantLadder.SetActive(true);
+
+                StartCoroutine(AnimGrowing());
                 _Plant = false;
             }
 
@@ -39,5 +44,11 @@ public class PlantGrowing : MonoBehaviour
             _enemyDungBeetle = null;
             
         }
+    }
+    IEnumerator AnimGrowing()
+    {
+        _anim.SetBool("Growing", true);
+        yield return new WaitForSeconds(0.8f);
+        _PlantLadder.SetActive(true);
     }
 }

@@ -9,7 +9,8 @@ public class Plant : MonoBehaviour
 
     private int currentTarget;
     private bool _stopPlatform;
-    
+    private bool _parentE = false;
+    private bool _parentP = false;
     private void Update()
     {
         if (!_stopPlatform)
@@ -31,6 +32,7 @@ public class Plant : MonoBehaviour
                 currentTarget = 0;
             }
         }
+        
     }
     IEnumerator RealodingPlatforms()
     {
@@ -43,6 +45,7 @@ public class Plant : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.transform.parent.parent = transform;
+           
         }
         else if (collision.gameObject.CompareTag("Player") )
         {
